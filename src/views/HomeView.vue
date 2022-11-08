@@ -713,27 +713,20 @@
 </template>
 
 <script setup>
-import axios from "axios";
-// import auth from "@/api/index.js";
+// import axios from "axios";
+import auth from "@/api/index.js";
 import { onMounted, ref } from "vue";
-// const item = ref(null);
+const items = ref(null);
 const isContent = ref(true);
-//   data() {
-//     return {
-//       item: null,
-//       isContent: true,
-//     };
-//   },
-//   methods: {
+
 const handeTovar = () => {
   isContent.value = true;
 };
 const tovarContent = async () => {
   try {
-    const datas = await axios.get(
-      "https://tenderpark.uz/api/v1/public-v-1-controller/get"
-    );
-    console.log(datas);
+    const datas = await auth.get("api/aucksiyon/v1/lots/published");
+     console.log(datas);
+     items.value = datas
   } catch (err) {
     console.log(err);
   }
@@ -742,13 +735,9 @@ const showTovar = () => {
   isContent.value = false;
 };
 onMounted(async () => {
-   tovarContent();
-})
-// return {
-//   item,
-//   isContent
-// }
-//   },
+  tovarContent();
+});
+
 </script>
 <style lang="scss">
 .notactive {
